@@ -23,7 +23,7 @@ namespace GStore.Repositories
         {
             Level2Set l1SetAndl2Set =
                 await dbContext.Level2Sets
-                .Include(x => x.Level1Set.Name)
+                .Include(x => x.Level1Set)
                 .Where(l2 => l2.Id == id).AsNoTracking()
                 .FirstOrDefaultAsync();
 

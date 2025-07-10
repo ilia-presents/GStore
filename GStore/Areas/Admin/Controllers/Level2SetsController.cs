@@ -56,6 +56,7 @@ namespace GStore.Areas.Admin.Controllers
             if (ModelState.IsValid == false)
             {
                 l2SetVM.L1Sets = await l2SetRepository.GetAllLevel1Categories();
+                l2SetVM.SelectedRadioValue = null;
                 return View(l2SetVM);
             }
 

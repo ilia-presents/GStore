@@ -14,8 +14,6 @@ namespace GStore.Models
         public bool IsActive { get; set; }
         public virtual Level1Set Level1Set { get; set; }
 
-        //public string r5fdgdfg Level1Set.Name { get; set; }
-
         public virtual IEnumerable<Shirt> Shirts { get; set; }
 
         public static void ToggleActivityStatus(Level2Set l2Set)
