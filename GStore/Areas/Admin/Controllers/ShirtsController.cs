@@ -17,6 +17,7 @@ using GStore.Utils.ImageDataHelper.Interface;
 using System.Xml.Linq;
 using GStore.Repositories;
 using GStore.Models.DTOs;
+using GStore.ModelsHelper;
 
 namespace GStore.Areas.Admin.Controllers
 {
@@ -480,7 +481,7 @@ namespace GStore.Areas.Admin.Controllers
                 return View(shirtVM);
             }
 
-            Shirt shirt = Shirt.MapVmToEntityForCreate(shirtVM);
+            Shirt shirt = ShirtHelper.MapVmToEntityForCreate(shirtVM);
 
             bool boolResult = await shirtRepository
                 .SetShirtAndAllShirtRelatedTables(shirt);
