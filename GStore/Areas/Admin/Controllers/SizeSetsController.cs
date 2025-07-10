@@ -14,6 +14,7 @@ using GStore.Repositories.Interfaces;
 using GStore.Utils.Constants;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using GStore.ModelsHelper;
 //using GStore.Models.ExtensionMappers;
 
 namespace GStore.Areas.Admin.Controllers
@@ -31,7 +32,7 @@ namespace GStore.Areas.Admin.Controllers
         // GET: Admin/SizeSets
         public async Task<IActionResult> Index()
         {
-            IEnumerable<SizeSetVM> sizeSetsVM = await sizeSetRepository.GetAllVmsNoTracking(SizeSet.SizeSetToVmSelector);
+            IEnumerable<SizeSetVM> sizeSetsVM = await sizeSetRepository.GetAllVmsNoTracking(SizeSetHelper.SizeSetToVmSelector);
 
             return View(sizeSetsVM);
         }
@@ -53,7 +54,7 @@ namespace GStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid == false) return View(sizeSetVM);
 
-            SizeSet sizeSet = SizeSet.MapVmToEntity(sizeSetVM);
+            SizeSet sizeSet = SizeSetHelper.MapVmToEntity(sizeSetVM);
 
             bool resultFromCreate = await sizeSetRepository
                 .SetSizeAndAllSizeRelatedTables(sizeSet);
@@ -76,7 +77,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (sizeSet == null) return BadRequest();
 
-            SizeSetVM sizeSetVM = SizeSet.MapEntityToVm(sizeSet);
+            SizeSetVM sizeSetVM = SizeSetHelper.MapEntityToVm(sizeSet);
 
             return View(sizeSetVM);
         }
@@ -96,7 +97,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (sizeSet == null) return BadRequest();
 
-            SizeSet.MapEntityForEdit(sizeSet, sizeSetVM);
+            SizeSetHelper.MapEntityForEdit(sizeSet, sizeSetVM);
 
             bool resultFromEdit = await sizeSetRepository.UpdateAsync(sizeSet);
 
@@ -116,10 +117,10 @@ namespace GStore.Areas.Admin.Controllers
 
             if (sizeSet == null) return NotFound();
 
-            SizeSetVM sizeSetVM = SizeSet.MapEntityToVm(sizeSet);
+            SizeSetVM sizeSetVM = SizeSetHelper.MapEntityToVm(sizeSet);
 
             SizeStutusChangeVM statusChangeVM =
-                SizeSet.SetStatusChange(sizeSetVM);
+                SizeSetHelper.SetStatusChange(sizeSetVM);
 
             return View(statusChangeVM);
         }
@@ -135,7 +136,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (sizeSet == null) return BadRequest();
 
-            SizeSet.ToggleActivityStatus(sizeSet);
+            SizeSetHelper.ToggleActivityStatus(sizeSet);
 
             bool resultFromChangeStatus = await sizeSetRepository
                 .UpdateSizeAndShirtAvailabilitySizes(sizeSet);
