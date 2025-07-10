@@ -52,7 +52,7 @@ namespace GStore.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("",
-                             VarietyValues.ErrorOnCreation);
+                             VarietyTexts.ErrorOnCreation);
 
                 return View(colorSetVM);
         }
@@ -135,7 +135,7 @@ namespace GStore.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("",
-                 VarietyValues.ErrorOnUpdate);
+                 VarietyTexts.ErrorOnUpdate);
             return View(colorSet);
         }
     }

@@ -10,7 +10,7 @@ namespace GStore.Models.ViewModels
     {
         public int? ProductId { get; set; }
 
-        public string ErrorMessage { get; set; } = VarietyValues.ErrorMessageOnColoreSelection;
+        public string ErrorMessage { get; set; } = VarietyTexts.ErrorMessageOnColoreSelection;
 
         public string SuccessOnUpdate { get; set; } = "";
 
@@ -18,7 +18,7 @@ namespace GStore.Models.ViewModels
         public ShirtShortWithCategoryNameVM ShirtShortById { get; set; }
 
         //[Required]
-        [ColorsListValidation(ErrorMessage = VarietyValues.ErrorMessageOnColoreSelection)]
+        [ColorsListValidation(ErrorMessage = VarietyTexts.ErrorMessageOnColoreSelection)]
         public List<ColorsPerShirtVM> ListColorsPerShirt { get; set; }
     }
 }
