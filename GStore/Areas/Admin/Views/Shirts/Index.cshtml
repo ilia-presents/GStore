@@ -1,0 +1,89 @@
+﻿@model IEnumerable<GStore.Models.ViewModels.ShirtShortWithCategoryNameVM>
+
+@{
+    ViewData["Title"] = "Списък тениски";
+}
+
+<h1>Списък тениски</h1>
+
+<p>
+    <a asp-action="Create">Създай тениска</a>
+</p>
+@foreach (var shirtPrevItem in Model) 
+{
+    <div class="row border border-dark pt-3 mb-3 rounded">
+        <div class="col-md-4">
+            <partial name="~/Views/Shared/_ShirtWithCategoryNamePreview.cshtml" model="@shirtPrevItem" />
+        </div>
+        <div class="col-md-8">
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <div class="browser-wrapper">
+                        <div class="links-wrapper">
+                            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="Edit" asp-route-id="@shirtPrevItem.ShirtShortPreviewVM.Id">1. Редакция на текст</a></p>
+                            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="EditSizesPerShirt" asp-route-id="@shirtPrevItem.ShirtShortPreviewVM.Id">2. Редакция на налични размери</a></p>
+                            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="EditColorsPerShirt" asp-route-id="@shirtPrevItem.ShirtShortPreviewVM.Id">3. Редакция на налични цветове</a></p>
+                            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="AddMainImages" asp-route-id="@shirtPrevItem.ShirtShortPreviewVM.Id">4. Редакция на основни снимки</a></p>
+                            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="AddColorImages" asp-route-id="@shirtPrevItem.ShirtShortPreviewVM.Id">5. Редакция на снимки по цветове</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <table class="custom-outer-table">
+                        <colgroup>
+                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 19%;">
+                            <col span="1" style="width: 45%;">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Активна: @* @shirtPrevItem.ShirtActive *@
+                                </td>
+                                <td>
+                                    <span class="checkmarks">@Html.Raw(@shirtPrevItem.ShirtSign)</span>
+                                </td>
+                                <td>
+                                    <a asp-area="Admin" asp-controller="Shirts" asp-action="ChangeActiveStatus" asp-route-id="@shirtPrevItem.ShirtShortPreviewVM.Id">@shirtPrevItem.ShirtLinkText</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Налична:
+                                </td>
+                                <td>
+                                    @if (@shirtPrevItem.IsAvailable)
+                                    {
+                                        <span class="checkmarks">&#10004;</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="checkmarks">&#10060;</span>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Промоция:
+                                </td>
+                                <td>
+                                    @if (@shirtPrevItem.ShirtShortPreviewVM.IsPromo)
+                                    {
+                                        <span class="checkmarks">&#10004;</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="checkmarks">&#10060;</span>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

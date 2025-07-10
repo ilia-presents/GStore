@@ -1,0 +1,34 @@
+﻿@model GStore.Models.ViewModels.ShirtShortPreviewVM
+@{
+    Layout = null;
+}
+<div class="article-wrapper">
+    <div class="image-wrapper">
+        <img src="~/productimages/midd/@Model.ImageLinkOne" alt="@Model.Name">
+        <img src="~/productimages/midd/@Model.ImageLinkTwo" class="hover-img" alt="@Model.Name">
+    </div>
+    <div class="article-padding article-top-border flex-content">
+        <div class="flex-left-part-midd">
+            <span>Тениска </span>
+        </div><div class="flex-right-part-midd">
+            <span class="title-wrapper">@Model.Name</span>
+        </div>
+    </div>
+    <div class="article-padding article-top-border flex-content">
+        <div class="flex-left-part-midd"><span>Цвят </span></div>
+        <div class="flex-right-part-midd padding-top-x">
+            @foreach (string colorCodeItem in Model.ColorCodes)
+            {
+                <span class="article-color-display" style="background-color:@colorCodeItem"></span>
+            }
+        </div>
+    </div>
+    <div class="article-top-border flex-content">
+        <div class="article-padding flex-left-part-bott">
+            <span class="price-style">@Model.Price лв</span>
+        </div>
+        <div class="flex-right-part-bott">
+            <a class="link-to-preview" asp-area="" asp-controller="Home" asp-action="ShirtFullPreview" asp-route-id="@Model.Id">Разгледай</a>
+        </div>
+    </div>
+</div>

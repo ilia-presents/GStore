@@ -1,0 +1,65 @@
+﻿@model IEnumerable<GStore.Models.ViewModels.ColorSetVM>
+
+@{
+    ViewData["Title"] = "Създаване на цвят";
+}
+
+<h1>Списък цветове</h1>
+<br />
+<p>
+    <a asp-area="Admin" asp-controller="ColorSets" asp-action="Create">Създай Нов Цвят</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorCode)
+            </th>
+            <th>Преглед</th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorCode)
+            </td>
+            <td>
+                <div class="admin-color-display" style="background-color:@item.ColorCode"></div>
+            </td>
+                <td style="vertical-align:middle;padding-left:22px;">
+                @if (item.IsActive)
+                    {
+                        <text><span class="checkmarks">&#10004;</span></text>
+                    }
+                    else
+                    {
+                        <text><span class="checkmarks">&#10060;</span></text>
+                    }
+                </td>
+            <td>
+                <a asp-area="Admin" asp-controller="ColorSets" asp-action="Edit" asp-route-id="@item.Id">Редакция</a> |
+                    
+                @if (item.IsActive)
+                {
+                    <a asp-area="Admin" asp-controller="ColorSets" asp-action="ChangeStatus" asp-route-id="@item.Id">Деактивирай</a>
+                }
+                else
+                {
+                    <a asp-area="Admin" asp-controller="ColorSets" asp-action="ChangeStatus" asp-route-id="@item.Id">Активирай</a>
+                }              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

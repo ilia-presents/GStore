@@ -1,0 +1,89 @@
+﻿@model GStore.Models.ViewModels.SizesPerShirtComboVM
+
+@{
+    ViewData["Title"] = "Тениска - Редакция на налични размери";
+}
+<h5>Тениска - Редакция на цветове</h5>
+<hr class="hr-for-br" />
+<div class="row border border-dark pt-3 mb-3 rounded">
+    <div class="col-md-4">
+        <partial name="~/Views/Shared/_ShirtWithCategoryNamePreview.cshtml" model="@Model.ShirtShortById" />
+    </div>
+    <div class="col-md-8">
+        <div class="browser-wrapper">
+            <div class="links-wrapper">
+                <p><a asp-area="Admin" asp-controller="Shirts" asp-action="Index">Отказ и обратно към листа с тениски</a></p>
+            </div>
+            <p class="green-message">@Model.SuccessOnUpdate</p>
+            <span asp-validation-for="ListSizesPerShirt" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <form id="editSizes" asp-action="EditSizesPerShirt">
+            <div>
+                @for (Int32 i = 0; i < @Model.ListSizesPerShirt.Count; i++)
+                {
+                    <input type="checkbox" asp-for="@Model.ListSizesPerShirt[i].Selected"
+                           class="element-zoom" />
+                    <label asp-for="@Model.ListSizesPerShirt[i].Selected"
+                           class="label-for-check-box">
+                        @Model.ListSizesPerShirt[i].Text
+                    </label>
+                    <input type="hidden" asp-for="@Model.ListSizesPerShirt[i].Value" />
+                    <br />
+                }
+            </div>
+            <span class="text-danger" id="errorMessangerSizes"></span>
+            <input type="hidden" asp-for="@Model.ProductId" />
+            <br />
+            <div>
+                <input class="btn btn-primary mt-3" type="submit" id="btnSubmitSizes" value="Запази" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6"></div>
+</div>
+<script type="text/javascript">
+
+    function justToCreateScopeSizes() { }
+
+    const btnSubmitSizes = document.getElementById("btnSubmitSizes");
+
+        function validateSizesCheckBoxesList(event) {
+
+        const theForm = document.getElementById("editSizes") 
+            , errorMessanger = document.getElementById("errorMessangerSizes")
+            , theCheckBoxesList = theForm.querySelectorAll('input[type="checkbox"]');
+
+            let isChecked = false;
+
+            for (var i = 0; i < theCheckBoxesList.length; i++) {
+                if (theCheckBoxesList[i].checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+
+            if (!isChecked) {
+
+                errorMessanger.textContent = "@Html.Raw(@Model.ErrorMessage)";
+                event.preventDefault();
+            }
+        }
+
+        // Both EventListeners work fine
+
+    btnSubmitSizes.addEventListener("click", function (event) {
+
+        validateSizesCheckBoxesList(event);
+    });
+
+        //theForm.addEventListener("submit", function (event) {
+
+        //    validateCheckBoxesList(event)
+        //});
+   
+</script>

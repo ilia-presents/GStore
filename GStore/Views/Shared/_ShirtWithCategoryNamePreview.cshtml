@@ -1,0 +1,8 @@
+﻿@model GStore.Models.ViewModels.ShirtShortWithCategoryNameVM
+@{
+    Layout = null;
+}
+<div class="preview-with-category-name-outer-wrapper">
+    <p class="category-name">@Model.CategoryName</p>
+    <partial name="~/Views/Shared/_ShirtPreview.cshtml" model="@Model.ShirtShortPreviewVM" />
+</div>

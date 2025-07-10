@@ -1,0 +1,50 @@
+﻿@using GStore.Models.ViewModels;
+@model IEnumerable<GStore.Models.ViewModels.L1SetVMForFullDisplay>
+
+@{
+    ViewData["Title"] = "Списък Категории Второ ниво";
+}
+
+<h1>Списък Категории Второ ниво</h1>
+
+<p>
+    <a asp-action="Create">Създай Нова Категория</a>
+</p>
+@foreach (L1SetVMForFullDisplay l1 in Model)
+{
+    <table class="custom-outer-table">
+        <thead>
+            <tr>
+                <th>
+                    Първо ниво категория
+                </th>
+                <th>
+                    Активна
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                        @Html.DisplayFor(modelItem => l1.Name)
+                </td>
+                <td>
+                        @if (l1.IsActive)
+                        {
+                            <text><span class="checkmarks">&#10004;</span></text>
+                        }
+                        else
+                        {
+                            <text><span class="checkmarks">&#10060;</span></text>
+                        }
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <partial name="_L2SetsInner" model="l1.L2SetsVMForFullDisplay" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+

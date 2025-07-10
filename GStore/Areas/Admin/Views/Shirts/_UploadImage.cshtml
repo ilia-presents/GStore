@@ -1,0 +1,75 @@
+﻿@model GStore.Models.ViewModels.UploadImageVM
+
+@{
+    Layout = null;
+    //ViewData["Title"] = "Качване на снимка";
+}
+
+@*<h4>Качване на снимка</h4>
+<hr />*@
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" id="formImageUpload" enctype="multipart/form-data" asp-area="Admin" asp-controller="Shirts" asp-action="UploadImage">
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="ImageType" />
+            <input type="hidden" asp-for="ColorId" />
+
+            <div class="form-group">
+                <label asp-for="ImageToUpload" class="control-label"></label>
+                <br /><br />
+                <div class="custom-file">
+                    <label class="custom-file-label" for="ImageToUpload"></label>
+                    <input asp-for="ImageToUpload" id="uploadImage" title="Image Upload" class="custom-file-input" />
+                </div>
+                <span asp-validation-for="ImageToUpload" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Добави" class="btn btn-primary" />
+                <input type="button" value="Откажи" id="btncancel" class="btn btn-primary" />
+            </div>
+            <br />
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div style="padding-top:14px">
+            <div style="max-width:250px; border: 1px solid black;">
+                <img id="imagePreview" src="~/@Model.ImagePath" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+@*<script src="~/lib/jquery/jquery.min.js"></script>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="~/lib/jquery-validation/dist/additional-methods.js"></script>*@
+@*<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+<script type="text/javascript">
+    $.validator.unobtrusive.parse($('#formImageUpload'));
+
+    const input = document.getElementById('uploadImage');
+    const previewPhoto = () => {
+        const file = input.files;
+        if (file) {
+            const fileReader = new FileReader();
+            const imagePreview = document.getElementById('imagePreview');
+            fileReader.onload = function (event) {
+                imagePreview.setAttribute('src', event.target.result);
+            }
+            fileReader.readAsDataURL(file[0]);
+        }
+    }
+    input.addEventListener("change", previewPhoto);
+</script>

@@ -1,0 +1,88 @@
+﻿@model GStore.Models.ViewModels.ShirtAvailabilityComboVM
+
+@{
+    ViewData["Title"] = "Тениска - Редакция на наличност по цветове и размери";
+}
+<h5>Тениска - Редакция на цветове</h5>
+<hr class="hr-for-br" />
+<div class="row border border-dark pt-3 mb-3 rounded">
+    <div class="col-md-4">
+        <partial name="~/Views/Shared/_ShirtWithCategoryNamePreview.cshtml" model="@Model.ShirtShortById" />
+    </div>
+    <div class="col-md-8">
+        <div class="browser-wrapper">
+            <div class="links-wrapper">
+                <p><a asp-area="Admin" asp-controller="Shirts" asp-action="Index">Отказ и обратно към листа с тениски</a></p>
+            </div>
+            <p class="green-message">@Model.SuccessOnUpdate</p>
+            <span asp-validation-for="ListShirtAvailability" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <form id="editAvailability" asp-action="EditShirtAvailability">
+            <div>
+                @for (Int32 i = 0; i < @Model.ListShirtAvailability.Count; i++)
+                {
+                    <input type="checkbox" asp-for="@Model.ListShirtAvailability[i].IsSelected"
+                           class="element-zoom" />
+                    <label asp-for="@Model.ListShirtAvailability[i].IsSelected"
+                           class="label-for-check-box">@Model.ListShirtAvailability[i].ColorName</label>
+                    <label class="color-for-display-sm vertical-align-middle"
+                           style="background-color:@Model.ListShirtAvailability[i].ColorCode"></label>
+                    <label class="label-for-check-box">Размер: @Model.ListShirtAvailability[i].SizeName</label>
+                    <input type="hidden" asp-for="@Model.ListShirtAvailability[i].ColorId" />
+                    <input type="hidden" asp-for="@Model.ListShirtAvailability[i].SizeId" />
+                    <br />
+                }
+            </div>
+            <input type="hidden" asp-for="@Model.ProductId" />
+            <span class="text-danger" id="errorMessengerAvailability"></span>
+            <br />
+            <div>
+                <input class="btn btn-primary mt-3" type="submit" id="btnSubmitShirtAvailability" value="Запази" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<script type="text/javascript">
+
+    const btnSubmitAvailability = document.getElementById("btnSubmitShirtAvailability");
+
+    function validateAvailabilityCheckBoxesList(event) {
+
+        const theForm = document.getElementById("editAvailability")
+            , errorMessenger = document.getElementById("errorMessengerAvailability")
+            , theCheckBoxesList = theForm.querySelectorAll('input[type="checkbox"]')
+
+        let isChecked = false;
+
+        for (var i = 0; i < theCheckBoxesList.length; i++) {
+            if (theCheckBoxesList[i].checked) {
+                isChecked = true;
+                break;
+            }
+        }
+
+        if (!isChecked) {
+
+            errorMessenger.textContent = "@Html.Raw(@Model.ErrorMessage)";
+            event.preventDefault();
+        }
+    }
+
+    // Both EventListeners work fine
+    btnSubmitAvailability.addEventListener("click", function (event) {
+
+        validateAvailabilityCheckBoxesList(event)
+    });
+
+            //theForm.addEventListener("submit", function (event) {
+
+            //    validateCheckBoxesList(event)
+            //});
+
+</script>

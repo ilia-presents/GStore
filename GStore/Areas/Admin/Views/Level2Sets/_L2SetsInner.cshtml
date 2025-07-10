@@ -1,0 +1,52 @@
+﻿@model IEnumerable<GStore.Models.ViewModels.L2SetVMForFullDisplay>
+
+@{
+    Layout = null;
+}
+<table class="custom-inner-table">
+    <thead>
+        <tr>
+            <th>
+                Второ ниво категория
+            </th>
+            <th>
+                Активна
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @foreach (var l2 in Model)
+    {
+        <tbody>
+            <tr>
+                <td class="custom-width">
+                    @Html.DisplayFor(modelItem => l2.Name)
+                </td>
+                <td>
+                    @if (l2.IsActive)
+                    {
+                        <text><span class="checkmarks">&#10004;</span></text>
+                    }
+                    else
+                    {
+                        <text><span class="checkmarks">&#10060;</span></text>
+                    }
+                </td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Level2Sets" asp-action="Edit" asp-route-id="@l2.Id">Редакция</a> |
+
+                    @if (l2.IsActive)
+                    {
+                        <a asp-area="Admin" asp-controller="Level2Sets" asp-action="ChangeStatus" asp-route-id="@l2.Id">Деактивирай</a>
+                    }
+                    else
+                    {
+                        <a asp-area="Admin" asp-controller="Level2Sets" asp-action="ChangeStatus" asp-route-id="@l2.Id">Активирай</a>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>

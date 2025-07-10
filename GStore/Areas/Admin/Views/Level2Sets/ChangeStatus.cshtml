@@ -1,0 +1,39 @@
+﻿@model GStore.Models.ViewModels.L2SetStutusChangeVM
+
+@{
+    ViewData["Title"] = Model.TextSetter.TitleText;
+}
+
+<h1>@Model.TextSetter.TitleText</h1>
+<br />
+<h3>@Model.TextSetter.WarningText</h3>
+<br />
+<div>
+    <h4>Категория 2 Ниво</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Горна категория
+        </dt>
+        <dd class="col-sm-10">
+            <strong>@Html.DisplayFor(model => model.L1Name)</strong>
+        </dd>
+        <dt class = "col-sm-2">
+            Име на категорията
+        </dt>
+        <dd class = "col-sm-10">
+            <strong>@Html.DisplayFor(model => model.Name)</strong>
+        </dd>
+        <dt class="col-sm-2">
+            <text>Активен Статус:</text>
+        </dt>
+        <dd class="col-sm-10">
+            <strong>@(Model.IsActive ? "Активирана" : "Деактивирана")</strong>
+        </dd>
+    </dl>
+    <form asp-action="ChangeStatus">
+        <input type="hidden" asp-for="@Model.Id" />
+        <input type="submit" value=@Model.TextSetter.ButtonText class="btn btn-danger" /> |
+        <a asp-action="Index">Отказ и oбратно към листа с катогории Ниво 2</a>
+    </form>
+</div>

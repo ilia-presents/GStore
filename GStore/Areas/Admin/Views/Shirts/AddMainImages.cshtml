@@ -1,0 +1,41 @@
+﻿@using GStore.Utils.Enums
+@model GStore.Models.ViewModels.ShirtShortWithCategoryNameVM
+
+@{
+    ViewData["Title"] = "Тениска - Редакция на основните снимки";
+    int imageFront = (int)EnumImagesUpload.MainImageFront;
+    int imageBack = (int)EnumImagesUpload.MainImageBack;
+}
+
+<h5>Тениска - Редакция на основните снимки</h5>
+
+<div class="row border border-dark pt-3 mb-3 rounded">
+    <div class="col-md-4">
+        <partial name="~/Views/Shared/_ShirtWithCategoryNamePreview.cshtml" model="@Model" />
+    </div>
+    <div class="col-md-8">
+        <div class="browser-wrapper">
+            <div class="links-wrapper">
+                <p><a asp-area="Admin" asp-controller="Shirts" asp-action="Index">Отказ и обратно към листа с тениски</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="browser-wrapper">
+            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="UploadImage" asp-route-id="@Model.ShirtShortPreviewVM.Id" asp-route-imageType="@imageFront.ToString()">Качи снимка</a></p>
+        </div>
+        <div>
+            <img class="image-border" src="~/productimages/big/@Model.ShirtShortPreviewVM.ImageLinkOne" alt="@Model.ShirtShortPreviewVM.Name">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="browser-wrapper">
+            <p><a asp-area="Admin" asp-controller="Shirts" asp-action="UploadImage" asp-route-id="@Model.ShirtShortPreviewVM.Id" asp-route-imageType="@imageBack.ToString()">Качи снимка</a></p>
+        </div>
+        <div>
+            <img class="image-border" src="~/productimages/big/@Model.ShirtShortPreviewVM.ImageLinkTwo" alt="@Model.ShirtShortPreviewVM.Name">
+        </div>
+    </div>
+</div>

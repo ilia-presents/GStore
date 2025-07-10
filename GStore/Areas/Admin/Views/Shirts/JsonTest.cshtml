@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Html
+@model GStore.Models.ViewModels.ShirtWithJasonStringVM
+
+@{
+    ViewData["Title"] = "JsonTest";
+}
+
+<h4>@Model.ShirtName</h4>
+
+<script type="text/javascript">
+
+    //let modelVar = @Model.ShirtAvailablityJson;
+
+    let tempVar = @Html.Raw(Model.ShirtAvailablityJson);
+
+    tempVar = JSON.stringify(tempVar)
+
+    let jsonVar = JSON.parse(tempVar);
+
+    console.log(jsonVar);
+
+    //console.log(tempVar);
+   
+</script>

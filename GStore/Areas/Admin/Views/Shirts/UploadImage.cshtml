@@ -1,0 +1,62 @@
+﻿@model GStore.Models.ViewModels.UploadImageVM
+
+@{
+    ViewData["Title"] = "Качване на снимка";
+}
+
+<h4>Качване на снимка</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" id="formImageUpload" enctype="multipart/form-data" asp-area="Admin" asp-controller="Shirts" asp-action="UploadImage">
+            <input type="hidden" asp-for="@Model.ProductId" />
+            <input type="hidden" asp-for="@Model.ImageType" />
+            <input type="hidden" asp-for="@Model.ColorId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ImageToUpload" class="control-label"></label>
+                <br /><br />
+                <div class="custom-file">
+                    <label class="custom-file-label" for="ImageToUpload"></label>
+                    <input asp-for="ImageToUpload" id="uploadImage" title="Image Upload" class="custom-file-input" />
+                </div>
+                <span asp-validation-for="ImageToUpload" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Добави" class="btn btn-primary" />
+            </div>
+            <br />
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div style="padding-top:14px">
+            <div style="max-width:250px; border: 1px solid black;">
+                <img id="imagePreview" src="~/@Model.ImagePath" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script type="text/javascript">
+    //$.validator.unobtrusive.parse($('#formImageUpload'));
+
+    const input = document.getElementById('uploadImage');
+    const previewPhoto = () => {
+        const file = input.files;
+        if (file) {
+            const fileReader = new FileReader();
+            const imagePreview = document.getElementById('imagePreview');
+            fileReader.onload = function (event) {
+                imagePreview.setAttribute('src', event.target.result);
+            }
+            fileReader.readAsDataURL(file[0]);
+        }
+    }
+    input.addEventListener("change", previewPhoto);
+</script>

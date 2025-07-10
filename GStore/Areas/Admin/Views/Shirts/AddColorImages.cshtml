@@ -1,0 +1,59 @@
+﻿@using GStore.Utils.Enums
+@model GStore.Models.ViewModels.ImagePerColorUploadComboVM
+
+@{
+    ViewData["Title"] = "Тениска - Редакция на снимките по цветове";
+    int imageColorFront = (int)EnumImagesUpload.ColorImageFront;
+    int imageColorBack = (int)EnumImagesUpload.ColorImageBack;
+}
+
+<h5>Тениска - Редакция на снимките по цветове</h5>
+<div class="row border border-dark pt-3 mb-3 rounded">
+    <div class="col-md-4">
+        <partial name="~/Views/Shared/_ShirtWithCategoryNamePreview.cshtml" model="@Model.shirtShortById" />
+    </div>
+    <div class="col-md-8">
+        <div class="browser-wrapper">
+            <div class="links-wrapper">
+                <p><a asp-area="Admin" asp-controller="Shirts" asp-action="Index">Отказ и обратно към листа с тениски</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var imagesPerColor in Model.listImagePerColorUploadVM)
+{
+    <div class="row border border-dark mb-3 rounded">
+        <div class="col-md-6 mb-3">
+            <div class="top-bottom-wrapper">
+                <p class="padding-left"><a asp-area="Admin" asp-controller="Shirts" asp-action="UploadImage" asp-route-id="@Model.shirtShortById.ShirtShortPreviewVM.Id" asp-route-imageType="@imageColorFront.ToString()" asp-route-colorId="@imagesPerColor.ColorId">Качи фронтална снимка</a></p>
+            </div>
+            <div class="row top-bottom-wrapper">
+                <div class="col-7">
+                    <p class="padding-left font-bold" style="color:@imagesPerColor.ColorCode">@imagesPerColor.ColorName</p>
+                </div>
+                <div class="col-5">
+                    <div class="div-for-color-display" style="background-color:@imagesPerColor.ColorCode"></div>
+                </div>
+            </div>
+            <div>
+                <img class="image-border" src="~/productimages/big/@imagesPerColor.ImageLinkOne" alt="@imagesPerColor.ColorName">
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="top-bottom-wrapper">
+                <p class="padding-left"><a asp-area="Admin" asp-controller="Shirts" asp-action="UploadImage" asp-route-id="@Model.shirtShortById.ShirtShortPreviewVM.Id" asp-route-imageType="@imageColorBack.ToString()" asp-route-colorId="@imagesPerColor.ColorId">Качи снимка гръб</a></p>
+            </div>
+            <div class="row top-bottom-wrapper">
+                <div class="col-7">
+                    <p class="padding-left font-bold" style="color:@imagesPerColor.ColorCode">@imagesPerColor.ColorName</p>
+                </div>
+                <div class="col-5">
+                    <div class="div-for-color-display" style="background-color:@imagesPerColor.ColorCode"></div>
+                </div>
+            </div>
+            <div>
+                <img class="image-border" src="~/productimages/big/@imagesPerColor.ImageLinkTwo" alt="@imagesPerColor.ColorName">
+            </div>
+        </div>
+    </div>
+}

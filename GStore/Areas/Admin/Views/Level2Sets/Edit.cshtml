@@ -1,0 +1,67 @@
+﻿@model GStore.Models.ViewModels.L2SetVM
+
+@{
+    ViewData["Title"] = "Редакция на категория Ниво 2";
+}
+
+<h1>Редакция на категория Ниво 2</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div>
+                    <div>
+                       Текуща горна категория
+                    </div>
+                    <div>
+                        <strong>@Html.DisplayFor(model => model.L1Name)</strong>
+                    </div>
+            </div>
+            <hr class="hr-for-br" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <hr class="hr-for-br" />
+            <div class="form-group">
+                <div>
+                    <div>
+                        <text>Активен Статус:</text>
+                    </div>
+                    <div>
+                        <strong>@(Model.IsActive ? "Активна" : "Деактивирана")</strong>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-for-br" />
+            <div class="form-group">
+                <div style="padding:8px;border-radius:7px;border:1px solid darkgray;" class="col">
+                    <p>Избор на категория от Ниво 1, към която да принадлежи</p>
+                    @foreach (var x in Model.L1Sets)
+                    {
+                        <input style="transform: scale(1.4);" type="radio" id="@x.Value" asp-for="SelectedRadioValue" value="@x.Value" />
+                        <label style="padding-left:8px; font-size:1.2rem" for="@x.Value">@x.Text</label>
+                        <input type="hidden" id="@x.Value" asp-for="@x.Value" />
+                        <br />
+                    }
+                    <span asp-validation-for="SelectedRadioValue" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr class="hr-for-br" />
+<div>
+    <a asp-action="Index">Отказ и обратно към листа катогории Ниво 2</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

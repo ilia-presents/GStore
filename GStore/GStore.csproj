@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-GStore-9d122918-a970-4db5-a3d4-3ab352275d1c</UserSecretsId>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20230713075451_Create_Alter_ColorShirtAvailability_view.cs" />
+    <Compile Remove="Data\Migrations\20230713075451_Create_Alter_ColorShirtAvailability_view.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230713212843_Create_VW_ShirtSqlShortView.cs" />
+    <Compile Remove="Data\Migrations\20230713212843_Create_VW_ShirtSqlShortView.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230713215000_Alter_VW_ShirtSqlShortView_Added_Discount.cs" />
+    <Compile Remove="Data\Migrations\20230713215000_Alter_VW_ShirtSqlShortView_Added_Discount.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230714073903_Add_ShirtShortWithCategoryNameVM_AndSP.cs" />
+    <Compile Remove="Data\Migrations\20230714073903_Add_ShirtShortWithCategoryNameVM_AndSP.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230714084114_Add_ShirtShortWithCategoryNameVM_AndSP_Correction.cs" />
+    <Compile Remove="Data\Migrations\20230714084114_Add_ShirtShortWithCategoryNameVM_AndSP_Correction.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230715180154_Add_SP_ShirtShortWithCategoryNameVM_For_One_Set.cs" />
+    <Compile Remove="Data\Migrations\20230715180154_Add_SP_ShirtShortWithCategoryNameVM_For_One_Set.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230718024510_Manually_Delete_SPs_And_VW.cs" />
+    <Compile Remove="Data\Migrations\20230718024510_Manually_Delete_SPs_And_VW.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230718024756_Manually_Delete_SPs_And_VW_Two.cs" />
+    <Compile Remove="Data\Migrations\20230718024756_Manually_Delete_SPs_And_VW_Two.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230718025044_Manually_Delete_SPs_And_VW_Three.cs" />
+    <Compile Remove="Data\Migrations\20230718025044_Manually_Delete_SPs_And_VW_Three.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230718025305_Manually_Delete_SPs_And_VW_Four.cs" />
+    <Compile Remove="Data\Migrations\20230718025305_Manually_Delete_SPs_And_VW_Four.Designer.cs" />
+    <Compile Remove="Data\Migrations\DropFKFroTablesShirtsAndLevel2Sets.cs" />
+    <Compile Remove="Data\Migrations\DropTableCreatedOnError.cs" />
+    <Compile Remove="Data\Migrations\Rename_ProductId_col_ToShirtId_On_SgirtsColorSets.cs" />
+    <Compile Remove="Models\ViewModels\ShirtShortWithCategoryNameAndColorsListVM.cs" />
+    <Compile Remove="Repositories\SizeSetsRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.18">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Shirts\AddColorImages.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Shirts\AddColorImages.cshtml" />
+  </ItemGroup>
+
+</Project>

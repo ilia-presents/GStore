@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GStore.Models.ViewModels.L1SetVM>
+
+@{
+    ViewData["Title"] = "Списък Категории Ниво 1";
+}
+
+<h1>Списък Категории Ниво 1</h1>
+
+<p>
+    <a asp-action="Create">Създай Нова Категория Ниво 1</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+            </td>
+            <td>
+                    @if (item.IsActive)
+                    {
+                        <text><span class="checkmarks">&#10004;</span></text>
+                    }
+                    else
+                    {
+                        <text><span class="checkmarks">&#10060;</span></text>
+                    }
+            </td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Level1Sets" asp-action="Edit" asp-route-id="@item.Id">Редакция</a> |
+
+                    @if (item.IsActive)
+                    {
+                        <a asp-area="Admin" asp-controller="Level1Sets" asp-action="ChangeStatus" asp-route-id="@item.Id">Деактивирай</a>
+                    }
+                    else
+                    {
+                        <a asp-area="Admin" asp-controller="Level1Sets" asp-action="ChangeStatus" asp-route-id="@item.Id">Активирай</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

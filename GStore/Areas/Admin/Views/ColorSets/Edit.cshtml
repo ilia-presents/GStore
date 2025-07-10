@@ -1,0 +1,62 @@
+﻿@model GStore.Models.ViewModels.ColorSetVM
+
+@{
+    ViewData["Title"] = "Редакция на Цвят";
+}
+
+<h1>Редакция на Цвят</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="ColorCode" class="control-label"></label>
+                <input asp-for="ColorCode" class="form-control" />
+                <span asp-validation-for="ColorCode" class="text-danger"></span>
+            </div>
+            <br />
+            <div style="vertical-align: middle;height:52px">
+                <div style="margin-right:12px;height:52px;display:inline-block;vertical-align: 16px;">Преглед: </div>
+                <div style="display:inline-block;border-radius:5px; width:60px;height:42px;background-color:@Model.ColorCode"></div>
+            </div>
+            <br />
+            <div>
+                <text>Активен Статус:</text>
+            </div>
+            <div>
+                <strong>@(Model.IsActive ? "Активен" : "Деактивиран")</strong>
+            </div>
+            <br />
+            <div class="form-group">
+                @if (Model.IsActive)
+                {
+                    @:Активиран цвят
+                }
+                else
+                {
+                    @:Деактивиран цвят
+                }               
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Редактирай" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Отказ и oбратно към листа с цветове</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

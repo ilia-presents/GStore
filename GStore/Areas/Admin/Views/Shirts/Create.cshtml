@@ -1,0 +1,57 @@
+﻿@model GStore.Models.ViewModels.ShirtVM
+
+@{
+    ViewData["Title"] = "Създаване на тениска";
+}
+<h1>Създаване на тениска</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <hr class="hr-for-br" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <hr class="hr-for-br" />
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <hr class="hr-for-br" />
+            <div class="form-group">
+                <div class ="col radio-buttons-holder">
+                <p>Избор на категория от Ниво 2, към която да принадлежи</p>
+                    @foreach (var x in Model.L2Sets)
+                    {
+                        <input style="transform: scale(1.3);" type="radio" id="@x.Value" asp-for="SelectedCategoryValue" value="@x.Value" />
+                        <label style="padding-left:8px; font-size:1.2rem" for="@x.Value">@x.Text</label>
+                        <input type="hidden" id="@x.Value" asp-for="@x.Value" />
+                        <br />
+                    }
+                    <span asp-validation-for="SelectedCategoryValue" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr class="hr-for-br" />
+<div>
+    <a asp-action="Index">Отказ и обратно към листа с тениски</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
