@@ -1,6 +1,7 @@
 ﻿using GStore.Data;
 using GStore.Models;
 using GStore.Models.ViewModels;
+using GStore.ModelsHelper;
 using GStore.Repositories.Interfaces;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -102,8 +103,10 @@ namespace GStore.Repositories
         }
 
 
-        public async Task<bool> SetColorAndAllColorRelatedTables(ColorSet colorSet)
+        public async Task<bool> SetColorAndAllColorRelatedTables(ColorSetVM colorSetVM)
         {
+            ColorSet colorSet = ColorSetHelper.MapVmToEntity(colorSetVM);
+
             using var transaction = dbContext.Database.BeginTransaction();
             {
                 try

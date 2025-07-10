@@ -44,10 +44,8 @@ namespace GStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid == false) return View(colorSetVM);
 
-            ColorSet colorSet = ColorSetHelper.MapVmToEntity(colorSetVM);
-
             bool resultFromCreate = await colorSetRepository
-                .SetColorAndAllColorRelatedTables(colorSet);
+                .SetColorAndAllColorRelatedTables(colorSetVM);
 
             if (resultFromCreate == true)
 
