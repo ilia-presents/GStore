@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GStore.Repositories
 {
@@ -18,6 +19,20 @@ namespace GStore.Repositories
                 : base(dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<ColorSetVM>> GetAllColorsVmNoTracking()
+        {
+            var resultVM = await dbContext.ColorSets.Select(colorSet => 
+            new ColorSetVM
+                {
+                    Id = colorSet.Id,
+                    Name = colorSet.Name,
+                    ColorCode = colorSet.ColorCode,
+                    IsActive = colorSet.IsActive
+                }).AsNoTracking().ToListAsync();
+
+            return resultVM;
         }
 
         public async Task<bool> UpdateColorAndShirtAvailabilityColors(ColorSet colorSet)

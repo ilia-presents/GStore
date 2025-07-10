@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GStore.Data;
 using GStore.Models;
 using GStore.Models.ViewModels;
-using System.Drawing.Imaging;
-using GStore.Repositories;
 using GStore.Repositories.Interfaces;
 using GStore.Utils.Constants;
+using GStore.ModelsHelper;
 
 namespace GStore.Areas.Admin.Controllers
 {
@@ -29,7 +22,7 @@ namespace GStore.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
 
-            IEnumerable<ColorSetVM> colorSetsVM = await colorSetRepository.GetAllVmsNoTracking(ColorSet.ColorSetToVmSelector);
+            IEnumerable<ColorSetVM> colorSetsVM = await colorSetRepository.GetAllColorsVmNoTracking();
 
             return View(colorSetsVM);
         }
@@ -51,7 +44,7 @@ namespace GStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid == false) return View(colorSetVM);
 
-            ColorSet colorSet = ColorSet.MapVmToEntity(colorSetVM);
+            ColorSet colorSet = ColorSetHelper.MapVmToEntity(colorSetVM);
 
             bool resultFromCreate = await colorSetRepository
                 .SetColorAndAllColorRelatedTables(colorSet);
@@ -75,7 +68,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (colorSet == null) return NotFound();
 
-            ColorSetVM colorSetVM = ColorSet.MapEntityToVm(colorSet);
+            ColorSetVM colorSetVM = ColorSetHelper.MapEntityToVm(colorSet);
 
             return View(colorSetVM);
         }
@@ -95,7 +88,7 @@ namespace GStore.Areas.Admin.Controllers
 
                 if (colorSet == null) return NotFound();
 
-                ColorSet.MapEntityForEdit(colorSet, colorSetVM);
+                ColorSetHelper.MapEntityForEdit(colorSet, colorSetVM);
 
                 bool resultFromEdit = await colorSetRepository.UpdateAsync(colorSet);
 
@@ -115,10 +108,10 @@ namespace GStore.Areas.Admin.Controllers
 
             if (colorSet == null) return NotFound();
 
-            ColorSetVM colorSetVM = ColorSet.MapEntityToVm(colorSet);
+            ColorSetVM colorSetVM = ColorSetHelper.MapEntityToVm(colorSet);
 
             ColorStutusChangeVM statusChangeVM =
-                ColorSet.SetStatusChange(colorSetVM);
+                ColorSetHelper.SetStatusChange(colorSetVM);
 
             return View(statusChangeVM);
         }
