@@ -9,14 +9,14 @@ namespace GStore.Models.ViewModels
     {
         public int? ProductId { get; set; }
 
-        public string ErrorMessage { get; set; } = VarietyValues.ErrorMessageOnAvailabilitySelection;
+        public string ErrorMessage { get; set; } = VarietyTexts.ErrorMessageOnAvailabilitySelection;
 
         public string SuccessOnUpdate { get; set; } = "";
 
         [ValidateNever]
         public ShirtShortWithCategoryNameVM ShirtShortById { get; set; }
 
-        [AvailabilityListValidation(ErrorMessage = VarietyValues.ErrorMessageOnAvailabilitySelection)]
+        [AvailabilityListValidation(ErrorMessage = VarietyTexts.ErrorMessageOnAvailabilitySelection)]
         public List<AvailabilityPerShirtVM> ListShirtAvailability { get; set; }
     }
 }

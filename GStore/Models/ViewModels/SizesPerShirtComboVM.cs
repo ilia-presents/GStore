@@ -9,14 +9,14 @@ namespace GStore.Models.ViewModels
     {
         public int? ProductId { get; set; }
 
-        public string ErrorMessage { get; set; } = VarietyValues.ErrorMessageOnSizeSelection;
+        public string ErrorMessage { get; set; } = VarietyTexts.ErrorMessageOnSizeSelection;
 
         public string SuccessOnUpdate { get; set; } = "";
 
         [ValidateNever]
         public ShirtShortWithCategoryNameVM ShirtShortById { get; set; }
 
-        [GenericCheckBoxListValidation(ErrorMessage = VarietyValues.ErrorMessageOnSizeSelection)]  
+        [GenericCheckBoxListValidation(ErrorMessage = VarietyTexts.ErrorMessageOnSizeSelection)]  
         public List<SelectListItem> ListSizesPerShirt { get; set; }
     }
 }

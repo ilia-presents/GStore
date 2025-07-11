@@ -17,6 +17,7 @@ using GStore.Utils.ImageDataHelper.Interface;
 using System.Xml.Linq;
 using GStore.Repositories;
 using GStore.Models.DTOs;
+using GStore.ModelsHelper;
 
 namespace GStore.Areas.Admin.Controllers
 {
@@ -75,11 +76,11 @@ namespace GStore.Areas.Admin.Controllers
 
             if (boolResult == false)
             {
-                ModelState.AddModelError("", VarietyValues.ErrorOnUpdate);
+                ModelState.AddModelError("", VarietyTexts.ErrorOnUpdate);
                 return View(shirtAvailabilityLocal);
             }
 
-            shirtAvailabilityLocal.SuccessOnUpdate = VarietyValues.SuccessOnUpdate;
+            shirtAvailabilityLocal.SuccessOnUpdate = VarietyTexts.SuccessOnUpdate;
 
             return View(shirtAvailabilityLocal);
         }
@@ -117,11 +118,11 @@ namespace GStore.Areas.Admin.Controllers
 
             if (boolResult == false)
             {
-                ModelState.AddModelError("", VarietyValues.ErrorOnUpdate);
+                ModelState.AddModelError("", VarietyTexts.ErrorOnUpdate);
                 return View(sizesPerShirtComboLocal);
             }
 
-            sizesPerShirtComboLocal.SuccessOnUpdate = VarietyValues.SuccessOnUpdate;
+            sizesPerShirtComboLocal.SuccessOnUpdate = VarietyTexts.SuccessOnUpdate;
 
             return View(sizesPerShirtComboLocal);
         }
@@ -158,11 +159,11 @@ namespace GStore.Areas.Admin.Controllers
 
             if (boolResult == false) 
             { 
-                ModelState.AddModelError("", VarietyValues.ErrorOnUpdate);
+                ModelState.AddModelError("", VarietyTexts.ErrorOnUpdate);
                 return View(colorsPerShirtComboLocal);
             }
 
-            colorsPerShirtComboLocal.SuccessOnUpdate = VarietyValues.SuccessOnUpdate;
+            colorsPerShirtComboLocal.SuccessOnUpdate = VarietyTexts.SuccessOnUpdate;
 
             return View(colorsPerShirtComboLocal);
         }
@@ -480,7 +481,7 @@ namespace GStore.Areas.Admin.Controllers
                 return View(shirtVM);
             }
 
-            Shirt shirt = Shirt.MapVmToEntityForCreate(shirtVM);
+            Shirt shirt = ShirtHelper.MapVmToEntityForCreate(shirtVM);
 
             bool boolResult = await shirtRepository
                 .SetShirtAndAllShirtRelatedTables(shirt);
@@ -490,7 +491,7 @@ namespace GStore.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("",
-                             VarietyValues.ErrorOnCreation);
+                             VarietyTexts.ErrorOnCreation);
 
             shirtVM.L2Sets = await shirtRepository.GetAllLevel2Categories();
             return View(shirtVM);

@@ -1,6 +1,6 @@
 ﻿namespace GStore.Utils.Constants
 {
-    public static class VarietyValues
+    public static class VarietyTexts
     {
         public const string ErrorOnCreation = "Имаше сериозен проблем и създаването НЕ беше запазено. Запишете какъв е бил проблема и се свържете с програмиста.";
 

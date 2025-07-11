@@ -181,7 +181,7 @@ namespace GStore.Repositories
 
         public async Task<IEnumerable<TResult>> GetAllVmsNoTracking<TResult>(Expression<Func<T, TResult>> selector)
         {
-            var resultVM = await _entities.Select(selector).ToListAsync();
+            var resultVM = await _entities.AsNoTracking().Select(selector).ToListAsync();
 
             return resultVM;
         }

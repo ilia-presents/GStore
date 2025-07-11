@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using GStore.Repositories.Interfaces;
 using NuGet.ContentModel;
+using GStore.ModelsHelper;
 
 namespace GStore.Areas.Admin.Controllers
 {
@@ -60,7 +61,7 @@ namespace GStore.Areas.Admin.Controllers
                 return View(l2SetVM);
             }
 
-            Level2Set l2Set = Level2Set.MapVmToEntity(l2SetVM);
+            Level2Set l2Set = Level2SetHelper.MapVmToEntity(l2SetVM);
 
             bool resultFromCreate = await l2SetRepository.AddAsync(l2Set);
 
@@ -80,7 +81,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (l2SetAndl1Set == null) return BadRequest();
 
-            L2SetVM l2SetVM = Level2Set.MapEntityToVm(l2SetAndl1Set);
+            L2SetVM l2SetVM = Level2SetHelper.MapEntityToVm(l2SetAndl1Set);
 
             l2SetVM.L1Sets = await l2SetRepository.GetAllLevel1Categories();
 
@@ -106,7 +107,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (l2Set == null) return BadRequest();
 
-            Level2Set.MapVMToEntityForEditPost(l2Set, l2SetVM);
+            Level2SetHelper.MapVMToEntityForEditPost(l2Set, l2SetVM);
 
             bool resultFromEdit = await l2SetRepository.UpdateAsync(l2Set);
 
@@ -130,7 +131,7 @@ namespace GStore.Areas.Admin.Controllers
             if (l2Set == null) return NotFound();
 
             L2SetStutusChangeVM statusChangeVM =
-                Level2Set.SetStatusChange(l2Set);
+                Level2SetHelper.SetStatusChange(l2Set);
 
             return View(statusChangeVM);
         }
@@ -146,7 +147,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (l2Set == null) return BadRequest();
 
-            Level2Set.ToggleActivityStatus(l2Set);
+            Level2SetHelper.ToggleActivityStatus(l2Set);
 
             bool resultFromChangeStatus = await l2SetRepository.UpdateAsync(l2Set);
 

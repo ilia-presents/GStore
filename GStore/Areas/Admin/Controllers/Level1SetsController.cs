@@ -10,6 +10,7 @@ using GStore.Models;
 using GStore.Models.ViewModels;
 using GStore.Repositories.Interfaces;
 using GStore.Repositories;
+using GStore.ModelsHelper;
 
 
 namespace GStore.Areas.Admin.Controllers
@@ -27,7 +28,7 @@ namespace GStore.Areas.Admin.Controllers
         // GET: Admin/Level1Set
         public async Task<IActionResult> Index()
         {
-            IEnumerable<L1SetVM> l1SetsVM = await l1SetRepository.GetAllVmsNoTracking(Level1Set.LevelSetToVmSelector); ;
+            IEnumerable<L1SetVM> l1SetsVM = await l1SetRepository.GetAllVmsNoTracking(Level1SetHelper.LevelSetToVmSelector); ;
 
             return View(l1SetsVM);
         }
@@ -47,7 +48,7 @@ namespace GStore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid == false) return View();
 
-            Level1Set l1Set = Level1Set.MapVmToEntity(l1SetVM);
+            Level1Set l1Set = Level1SetHelper.MapVmToEntity(l1SetVM);
 
             bool resultFromCreate = await l1SetRepository.AddAsync(l1Set);
 
@@ -67,7 +68,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (l1Set == null) return NotFound();
 
-            L1SetVM l1SetVM = Level1Set.MapEntityToVm(l1Set);
+            L1SetVM l1SetVM = Level1SetHelper.MapEntityToVm(l1Set);
 
             return View(l1SetVM);
         }
@@ -87,7 +88,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (l1Set == null) return NotFound();
 
-            Level1Set.MapEntityForEdit(l1Set, l1SetVM);
+            Level1SetHelper.MapEntityForEdit(l1Set, l1SetVM);
 
             bool resultFromEdit = await l1SetRepository.UpdateAsync(l1Set);
 
@@ -107,10 +108,10 @@ namespace GStore.Areas.Admin.Controllers
 
             if (l1Set == null) return NotFound();
 
-            L1SetVM l1SetVM = Level1Set.MapEntityToVm(l1Set);
+            L1SetVM l1SetVM = Level1SetHelper.MapEntityToVm(l1Set);
 
             L1SetStutusChangeVM statusChangeVM =
-                Level1Set.SetStatusChange(l1SetVM);
+                Level1SetHelper.SetStatusChange(l1SetVM);
 
             return View(statusChangeVM);
         }
@@ -124,7 +125,7 @@ namespace GStore.Areas.Admin.Controllers
 
             Level1Set l1Set = await l1SetRepository.GetEntityByIdAsync(id.Value);
 
-            Level1Set.ToggleActivityStatus(l1Set);
+            Level1SetHelper.ToggleActivityStatus(l1Set);
 
             bool resultFromChangeStatus =
                 await l1SetRepository.UpdateAsync(l1Set);
