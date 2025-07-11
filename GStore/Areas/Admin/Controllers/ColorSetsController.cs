@@ -125,7 +125,7 @@ namespace GStore.Areas.Admin.Controllers
 
             if (colorSet == null) return NotFound();
 
-            ColorSet.ToggleActivityStatus(colorSet);
+            ColorSetHelper.ToggleActivityStatus(colorSet);
 
             bool resultFromChangeStatus = await colorSetRepository
                 .UpdateColorAndShirtAvailabilityColors(colorSet);
