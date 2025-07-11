@@ -20,10 +20,5 @@ namespace GStore.Models
         public bool IsActive { get; set; } = true;
 
         public virtual List<Shirt> Products { get; set; }
-
-        public static void ToggleActivityStatus(ColorSet colorSet)
-        {
-            colorSet.IsActive = !colorSet.IsActive;
-        }
     }
 }

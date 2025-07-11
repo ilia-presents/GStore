@@ -6,6 +6,11 @@ namespace GStore.ModelsHelper
     public static class ColorSetHelper
     {
 
+
+        public static void ToggleActivityStatus(ColorSet colorSet)
+        {
+            colorSet.IsActive = !colorSet.IsActive;
+        }
         public static ColorStutusChangeVM SetStatusChange(ColorSetVM colorSetVM)
         {
             ColorStutusChangeVM statusChangeVM = new ColorStutusChangeVM();
